@@ -6,5 +6,5 @@ node_modules/
 public/
 scaffolds/
 .deploy*/
-themes/*
+themes/next/*
 !themes/next/_config.yml
