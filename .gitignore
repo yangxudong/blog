@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+scaffolds/
+.deploy*/
+themes/*
+!themes/next/
+themes/next/*
+!themes/next/_config.yml
