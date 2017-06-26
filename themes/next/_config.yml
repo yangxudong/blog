@@ -39,6 +39,7 @@ seo: true
 menu:
   home: /
   archives: /archives
+  essays: /categories/essays
   categories: /categories
   tags: /tags
   about: /about
@@ -62,6 +63,7 @@ menu_icons:
   archives: archive
   sitemap: sitemap
   commonweal: heartbeat
+  essays: newspaper-o
 
 
 
@@ -480,3 +482,4 @@ version: 5.1.0
 
 reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
 alipay: /images/alipay.jpg
+wechatpay: /images/wechatpay.jpg
