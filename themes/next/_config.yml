@@ -323,11 +323,11 @@ mathjax:
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: true
-  user_id: 6369513997670024000
-  admin_nickname: Author
+#duoshuo_info:
+#  ua_enable: true
+#  admin_enable: true
+#  user_id: 6369513997670024000
+#  admin_nickname: Author
 
 
 # Facebook SDK Support.
@@ -381,6 +381,8 @@ busuanzi_count:
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
 baidu_push: true
+google_site_verification: true
+baidu_site_verification: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page
