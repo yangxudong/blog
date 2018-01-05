@@ -278,9 +278,6 @@ mathjax:
 # Baidu Analytics ID
 #baidu_analytics:
 
-# Duoshuo ShortName
-#duoshuo_shortname:
-
 # Disqus
 #disqus_shortname:
 
@@ -472,7 +469,14 @@ vendors:
   algolia_instant_js:
   algolia_instant_css:
 
-
+#Gitment
+gitment:
+  enable: true
+  githubID: yangxudong
+  repo: yangxudong.github.io
+  ClientID: a6f099e5dd8b15032ace
+  ClientSecret: 5bb7f33cc97a00106138632b133b361eca31b0fc
+  lazy: true
 
 # Assets
 css: css

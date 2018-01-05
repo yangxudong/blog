@@ -45,6 +45,14 @@ git clone https://github.com/iissnan/hexo-theme-next themes/next
 
 最重要的是拷贝并替换数据文件，即站点更目录下的source文件夹，所有博文的原始文件都在这个目录下。
 
+如果原博客的配置和文章等信息托管在github上，则可以使用下面的方法从远程下载文件到本地。首先需要切换到博客目录，执行git init命令把当前目录设置为git托管目录，并添加远程仓库，如下所示，需按照自己的远程仓库替换地址。接着就可以从远程仓库拉取数据了，如果拉取的过程中提升本地文件已存在，则需要先重命名本地文件或删除本地文件。
+
+```
+git init
+git remote add origin https://github.com/xxxx/blog.git
+git pull origin master
+```
+
 ## 配置MathJax
 
 配置方法参考我的另一篇博文：{% post_link math-in-hexo 在Hexo中渲染MathJax数学公式 %}
@@ -87,6 +95,12 @@ var storedPost = _.pick(data, ['title', 'date', 'slug', 'path', 'content', 'exce
 上传数据到Algolia引擎服务
 ```
 hexo algolia
+```
+
+## 开启评论功能
+
+```
+npm install gitment --save
 ```
 
 ## 提交搜索引擎
