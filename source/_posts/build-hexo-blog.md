@@ -3,6 +3,8 @@ title: hexo博客迁移流程
 date: 2017-02-04 19:55:44
 tags: hexo
 categories: 技术工具&平台
+comments: true
+toc: true
 ---
 
 本文并不是从头开始搭建hexo博客的教程，而是因为最近个人换了电脑，需求迁移原来搭建好的hexo博客，为了防止将来还需要迁移，特记录下操作流程，以便将来查看。
@@ -35,8 +37,10 @@ hexo s
 ##下载主题：
 ```
 cd your-hexo-site
-git clone https://github.com/iissnan/hexo-theme-next themes/next
+git clone https://github.com/theme-next/hexo-theme-next.git themes/next
 ```
+
+在 NexT 主题目录下的 languages/{language}.yml （{language} 为你所使用的语言）为添加的菜单项设置对于的语言内容。
 
 ##拷贝文件
 拷贝原来搭建好的博客的站点配置文件和主题配置文件_config.yml并在对应的配置目录下做替换。

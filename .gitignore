@@ -2,6 +2,7 @@
 Thumbs.db
 db.json
 package.json
+package-lock.json
 *.log
 node_modules/
 public/
