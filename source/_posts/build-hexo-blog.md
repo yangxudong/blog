@@ -101,10 +101,21 @@ var storedPost = _.pick(data, ['title', 'date', 'slug', 'path', 'content', 'exce
 hexo algolia
 ```
 
+或者配置站内搜索
+```
+npm install hexo-generator-searchdb --save
+```
+
 ## 开启评论功能
 
 ```
 npm install gitment --save
+```
+
+## 开启字数统计功能
+
+```
+npm install hexo-symbols-count-time --save
 ```
 
 ## 提交搜索引擎

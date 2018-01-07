@@ -36,6 +36,7 @@ skip_render:
   - google277d1d35e3828eea.html
   - baidu_verify_aJgr3KGY20.html
   - baidu_verify_jOdybAFLfC.html
+  - av-core-mini-0.6.4.js
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -103,10 +104,15 @@ baidusitemap:
 
 # Swiftype Search Key
 #swiftype_key: 12qjxk41RntjtXjpkrCx
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
-algolia:
-  applicationID: 17I06S2O13
-  apiKey: 7ed23efbbda2bad2ccc88934293582b2
-  adminApiKey: cec175abec5d70f1537772c4f0f0baff
-  indexName: MyBlogIndex
-  chunkSize: 5000
+#algolia:
+#  applicationID: 17I06S2O13
+#  apiKey: 7ed23efbbda2bad2ccc88934293582b2
+#  adminApiKey: cec175abec5d70f1537772c4f0f0baff
+#  indexName: MyBlogIndex
+#  chunkSize: 5000

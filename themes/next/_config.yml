@@ -233,6 +233,10 @@ post_meta:
 # Post wordcount display settings
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
 symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: false
   separated_meta: true
   item_text_post: true
   item_text_total: false
@@ -384,8 +388,8 @@ changyan:
 # more info please open https://valine.js.org
 valine:
   enable: false
-  appid:  # your leancloud application appid
-  appkey:  # your leancloud application appkey
+  appid: 3x93ITRyzcK4nPzuF2gwDx3U-gzGzoHsz
+  appkey: EMsLl2Kc0jdq3IF9FE7dohMd
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
   placeholder: Just go go # comment box placeholder
@@ -536,9 +540,11 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: true
-  app_id: bYp6b0sgetOuSC5AAozB3yNN-gzGzoHsz
-  app_key: tGnUPDp3vyWfTglwVpttySAy
+  enable: false
+  app_id: 3x93ITRyzcK4nPzuF2gwDx3U-gzGzoHsz
+  app_key: EMsLl2Kc0jdq3IF9FE7dohMd
+#  app_id: bYp6b0sgetOuSC5AAozB3yNN-gzGzoHsz
+#  app_key: tGnUPDp3vyWfTglwVpttySAy
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
@@ -554,20 +560,19 @@ firestore:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
-  site_uv_footer:
+  site_uv_header: <i class="fa fa-user"></i> 本站访客数
+  site_uv_footer: 人次
   # custom pv span for the whole site
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv_header: <i class="fa fa-eye"></i> 本站总访问量
+  site_pv_footer: 次
   # custom pv span for one page only
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer:
-
+  page_pv_header: <i class="fa fa-file-o"></i> 本文阅读次数
+  page_pv_footer: 
 
 # Tencent analytics ID
 # tencent_analytics:
@@ -612,7 +617,7 @@ algolia_search:
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
