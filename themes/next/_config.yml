@@ -413,7 +413,7 @@ gitment:
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
   github_user: yangxudong # MUST HAVE, Your Github ID
-  github_repo: blog # MUST HAVE, The repo you use to store Gitment comments
+  github_repo: yangxudong.github.io # MUST HAVE, The repo you use to store Gitment comments
   client_id: a6f099e5dd8b15032ace
   client_secret: 5bb7f33cc97a00106138632b133b361eca31b0fc
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
@@ -430,8 +430,8 @@ gitment:
 # This plugin is more useful in China, make sure you known how to use it.
 # And you can find the use guide at official webiste: http://www.jiathis.com/.
 # Warning: JiaThis does not support https.
-#jiathis:
-  ##uid: Get this uid from http://www.jiathis.com/
+jiathis:
+  uid: 2154625
 #add_this_id:
 
 # Share
