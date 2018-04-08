@@ -22,7 +22,7 @@ Gender=Male, City=London, CategoryId=16]，这些原始特征通常以独热编�
 
 Embedding表示也叫做Distributed representation，起源于神经网络语言模型（NNLM）对语料库中的word的一种表示方法。相对于高维稀疏的one-hot编码表示，embedding-based的方法，学习一个低维稠密实数向量（low-dimensional dense embedding）。类似于hash方法，embedding方法把位数较多的稀疏数据压缩到位数较少的空间，不可避免会有冲突；然而，embedding学到的是类似主题的语义表示，对于item的“冲突”是希望发生的，这有点像软聚类，这样才能解决稀疏性的问题。
 
-Google公司开源的word2vec工具让embedding表示方法广为人知。Embedding表示通常用神经网络模型来学习，当然也有其他学习方法。这里详细介绍一下基于神经网络的embedding学习方法。
+Google公司开源的word2vec工具让embedding表示方法广为人知。Embedding表示通常用神经网络模型来学习，当然也有其他学习方法，比如矩阵分解（MF）、因子分解机（FM)等。这里详细介绍一下基于神经网络的embedding学习方法。
 
 通常Embedding向量并不是通过一个专门的任务学习得到的，而是其他学习任务的附属产出。如下图所示，网络的输入层是实体ID（categorical特征）的one-hot编码向量。与输入层相连的一层就是Embedding层，两层之间通过全连接的方式相连。Embedding层的神经元个数即Embeeding向量的维数（$m$）。输入层与Embedding层的链接对应的权重矩阵$M(n \times m)$，即对应$n$个输入实体的m维embedding向量。由于one-hot向量同一时刻只会有一个元素值为1，其他值都是0，因此对于当前样本，只有与值为1的输入节点相连的边上的权重会被更新，即不同ID的实体所在的样本训练过程中只会影响与该实体对应的embedding表示。假设某实体ID的one-hot向量中下标为$i$的值为1，则该实体的embedding向量为权重矩阵$M$的第$i$行。
 ![embedding](ctr-models/embedding.png)
@@ -81,22 +81,23 @@ MLR算法是alibaba在2012年提出并使用的广告点击率预估模型，201
 
 $$f(x)=\sum_{i=1}^m \pi_i(x,\mu)\cdot \eta_i(x,w)=\sum_{i=1}^m \frac{e^{\mu_i^T x}}{\sum_{j=1}^m e^{\mu_j^T x}} \cdot \frac{1}{1+e^{-w^Tx}}$$
 
-MLR模型在大规模稀疏数据上探索和实现了非线性拟合能力，在分片数足够多时，有非常强的非线性能力；同时模型复杂度可控，有较好泛化能力；同时保留了LR模型的自动特征选择能力。
+上式即为MLR的目标函数，其中$m$为分片数（当$m=1$时，MLR退化为LR模型）；$\pi_i(x,\mu)= \frac{e^{\mu_i^T x}}{\sum_{j=1}^m e^{\mu_j^T x}}$是聚类参数，决定分片空间的划分，即某个样本属于某个特定分片的概率；$\eta_i(x,w) = \frac{1}{1+e^{-w^Tx}}$是分类参数，决定分片空间内的预测；$\mu$和$w$都是待学习的参数。最终模型的预测值为所有分片对应的子模型的预测值的期望。
+
+MLR模型在大规模稀疏数据上探索和实现了非线性拟合能力，在分片数足够多时，有较强的非线性能力；同时模型复杂度可控，有较好泛化能力；同时保留了LR模型的自动特征选择能力。
 
 MLR模型的思路非常简单，难点和挑战在于MLR模型的目标函数是非凸非光滑的，使得传统的梯度下降算法并不适用。相关的细节内容查询论文：Gai et al, “Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction” 。
 
-另一方面，MLR模型可以看作带有一个隐层的神经网络。
-如下图，X是大规模的稀疏输入数据，MLR模型第一步是做了一个Embedding操作，分为两个部分，一种叫聚类Embedding（绿色），另一种是分类Embedding（红色）。两个投影都投到低维的空间，纬度为M，对应的是MLR模型中的分片数。完成投影之后，通过很简单的内积（Inner Product）操作便可以进行预测，得到输出Y。
+另一方面，MLR模型可以看作带有一个隐层的神经网络。如下图，$x$是大规模的稀疏输入数据，MLR模型第一步是做了一个Embedding操作，分为两个部分，一种叫聚类Embedding（绿色），另一种是分类Embedding（红色）。两个投影都投到低维的空间，维度为$m$，是MLR模型中的分片数。完成投影之后，通过很简单的内积（Inner Product）操作便可以进行预测，得到输出$y$。
 ![MLR](ctr-models/mlr.jpg)
 
 ### 5. WDL（Wide & Deep Learning）
 
-像LR这样的wide模型学习特征与目标之间的直接相关关系，偏重记忆（memorization），如在推荐系统中，wide模型产生的推荐是与用户历史行为的物品直接相关的物品。这样的模型缺乏刻画特征之间的关系的能力，比如模型无法感知到“土豆”和“马铃薯”是相同的实体，在训练样本中没有出现的特征自然就无法使用，因此可能模型学习到某种类型的用户喜欢“土豆”，但却会判定该类型的用户不喜欢“马铃薯”。
+像LR这样的wide模型学习特征与目标之间的直接相关关系，偏重记忆（memorization），如在推荐系统中，wide模型产生的推荐是与用户历史行为的物品直接相关的物品。这样的模型缺乏刻画特征之间的关系的能力，比如模型无法感知到“土豆”和“马铃薯”是相同的实体，在训练样本中没有出现的特征组合自然就无法使用，因此可能模型学习到某种类型的用户喜欢“土豆”，但却会判定该类型的用户不喜欢“马铃薯”。
 
-WDL模型巧妙地将传统的特征工程与深度模型进行了强强联合。模型结构如下:
+WDL是Google在2016年的paper中提出的模型，其巧妙地将传统的特征工程与深度模型进行了强强联合。模型结构如下:
 ![wdl](ctr-models/wdl.png)
 
-WDL分为wide和deep两部分联合训练，单看wide部分与LR模型并没有什么区别；deep部分则是先对不同的ID类型特征做embedding，在embedding层接一个全连接的MLP（多层感知机），用于学习特征之间的高阶组合交叉关系。由于Embedding机制的引入，WDL相对于单纯的wide模型有更强的泛化能力。
+WDL分为wide和deep两部分联合训练，单看wide部分与LR模型并没有什么区别；deep部分则是先对不同的ID类型特征做embedding，在embedding层接一个全连接的MLP（多层感知机），用于学习特征之间的高阶交叉组合关系。由于Embedding机制的引入，WDL相对于单纯的wide模型有更强的泛化能力。
 
 ### 6. FNN (Factorization-machine supported Neural Network)
 
@@ -117,25 +118,25 @@ Embedding Layer和Product Layer之间的权重为常量1，在学习过程中不
 
 ![](ctr-models/product_operation.jpg)
 
-在IPNN中，由于Product Layer的$p$向量由field两两配对产生，因此维度膨胀很大，给l1 Layer的节点计算带来了很大的压力。受FM启发，可以把这个大矩阵转换分解为小矩阵和它的转置相乘，表征到低维度连续向量空间，来减少模型复杂度：$$W_p^n \odot p = \sum_{i=1}^N \sum_{j=1}^N \theta_i^n \theta_j^n \langle f_i,f_j \rangle = \langle \sum_{i=1}^N \delta_i^n, \sum_{i=1}^N \delta_i^n \rangle $$
+在IPNN中，由于Product Layer的$p$向量由field两两配对产生，因此维度膨胀很大，给l1 Layer的节点计算带来了很大的压力。受FM启发，可以把这个大矩阵转换分解为小矩阵和它的转置相乘，表征到低维度连续向量空间，来减少模型复杂度：$W_p^n \odot p = \sum_{i=1}^N \sum_{j=1}^N \theta_i^n \theta_j^n \langle f_i,f_j \rangle = \langle \sum_{i=1}^N \delta_i^n, \sum_{i=1}^N \delta_i^n \rangle $。
 
-在OPNN中，外积操作带来更多的网络参数，为减少计算量，使得模型更易于学习，采用了多个外积矩阵按元素叠加（element-wise superposition）的技巧来减少复杂度，具体如下：$$p=\sum_{i=1}^N \sum_{j=1}^N f_i f_j^T=f_{\Sigma}(f_{\Sigma})^T, f_{\Sigma}=\sum_{j=1}^N f_i$$
+在OPNN中，外积操作带来更多的网络参数，为减少计算量，使得模型更易于学习，采用了多个外积矩阵按元素叠加（element-wise superposition）的技巧来减少复杂度，具体如下：$p=\sum_{i=1}^N \sum_{j=1}^N f_i f_j^T=f_{\Sigma}(f_{\Sigma})^T, f_{\Sigma}=\sum_{j=1}^N f_i$。
 
 ### 8. DeepFM
 
-深度神经网络在学习复杂的特征关系中非常有潜力。目前也有很多基于CNN与RNN的用于CTR预估的模型。但是基于CNN的模型比较偏向于相邻的特征提取，基于RNN的模型更适合有序列依赖的点击数据。
+深度神经网络对于学习复杂的特征关系非常有潜力。目前也有很多基于CNN与RNN的用于CTR预估的模型。但是基于CNN的模型比较偏向于相邻的特征组合关系提取，基于RNN的模型更适合有序列依赖的点击数据。
 
-FNN模型首先预训练FM，再将训练好的FM应用到DNN中。PNN网络的embedding层与全连接层之间加了一层Product Layer来完成特征组合。PNN和FNN与其他深度学习模型相似，很难有效的提取出低阶特征。WDL模型混合了宽度(wide)模型与深度模型，但是宽度模型的输入依旧依赖于特征工程。
+FNN模型首先预训练FM，再将训练好的FM应用到DNN中。PNN网络的embedding层与全连接层之间加了一层Product Layer来完成特征组合。PNN和FNN与其他已有的深度学习模型类似，都很难有效地提取出低阶特征组合。WDL模型混合了宽度模型与深度模型，但是宽度模型的输入依旧依赖于特征工程。
 
-因此，上述模型要不然偏向于低阶特征或者高阶特征的提取，要不然依赖于特征工程。而DeepFM模型可以以端对端的方式来学习不同阶的组合特征关系，并且不需要其他特征工程。
+上述模型要不然偏向于低阶特征或者高阶特征的提取，要不然依赖于特征工程。而DeepFM模型可以以端对端的方式来学习不同阶的组合特征关系，并且不需要其他特征工程。
 
 DeepFM的结构中包含了因子分解机部分以及深度神经网络部分，分别负责低阶特征的提取和高阶特征的提取。其结构如下：
 
 ![deepfm](ctr-models/deepfm.jpg)
 
-与Wide&Deep Model不同，DeepFM共享相同的输入与embedding向量。在Wide&Deep Model中，因为在Wide部分包含了人工设计的成对特征组，所以输入向量的长度也会显著增加，这也增加了其复杂性。
+与Wide&Deep Model不同，DeepFM共享相同的输入与embedding向量。在Wide&Deep Model中，因为在Wide部分包含了人工设计的成对特征组，所以输入向量的长度也会显著增加，这也增加了复杂性。
 
-DeepFM包含两部分：神经网络部分与因子分解机部分。这两部分共享同样的输入。对于给定特征$i$，向量$w_i$用于表征一阶特征的重要性，隐变量$V_i$用于表示与其他特征的相互影响。在FM部分，$V_i$用于表征二阶特征，同时在神经网络部分用于构建高阶特征。所有的参数共同参与训练。DeepFM的预测结果可以写为 $$\hat{y}=sigmoid(y_{FM}+y_{DNN})$$
+DeepFM包含两部分：神经网络部分与因子分解机部分。这两部分共享同样的输入。对于给定特征$i$，向量$w_i$用于表征一阶特征的重要性，隐变量$V_i$用于表示该特征与其他特征的相互影响。在FM部分，$V_i$用于表征二阶特征，同时在神经网络部分用于构建高阶特征。所有的参数共同参与训练。DeepFM的预测结果可以写为 $$\hat{y}=sigmoid(y_{FM}+y_{DNN})$$
 其中$\hat{y}∈(0,1)$是预测的点击率，$y_{FM}$与$y_{DNN}$分是FM部分与DNN部分。
 
 FM部分的详细结构如下：
@@ -147,7 +148,7 @@ $$y_{FM}=\langle w,x \rangle + \sum_{i=1}^d \sum_{j=i+1}^d \langle V_i,V_j \rang
 
 深度部分详细如下：
 ![dnn](ctr-models/dnn.png)
-深度部分是一个前馈神经网络。与图像或者语音这类输入不同，图像语音的输入一般是连续而且密集的，然而用于CTR的输入一般是及其稀疏的。因此需要重新设计网络结构。具体实现中为，在第一层隐含层之前，引入一个嵌入层来完成将输入向量压缩到低维稠密向量。
+深度部分是一个前馈神经网络。与图像或者语音这类输入不同，图像语音的输入一般是连续而且密集的，然而用于CTR的输入一般是及其稀疏的。因此需要设计特定的网络结构，具体实现为，在第一层隐含层之前，引入一个嵌入层来完成将输入向量压缩到低维稠密向量。
 
 $$y_{DNN}=\sigma(W^{H+1} \cdot a^H + b^{H+1})$$
 
@@ -155,9 +156,10 @@ $$y_{DNN}=\sigma(W^{H+1} \cdot a^H + b^{H+1})$$
 
 ### 9. DIN
 
-DIN方法基于对用户历史行为数据的两个观察：1、多样性，一个用户可能对多种品类的东西感兴趣；2、部分对应，只有一部分的历史数据对目前的点击预测有帮助，比如系统向用户推荐泳镜时会与用户点击过的泳衣产生关联，但是跟用户买的书就关系不大。于是，DIN设计了一个attention结构，对用户的历史数据和待估算的广告之间部分匹配，从而得到一个权重值，用来进行embedding间的加权求和。
+DIN是阿里17年的论文中提出的深度学习模型，该模型基于对用户历史行为数据的两个观察：1、多样性，一个用户可能对多种品类的东西感兴趣；2、部分对应，只有一部分的历史数据对目前的点击预测有帮助，比如系统向用户推荐泳镜时会与用户点击过的泳衣产生关联，但是跟用户买的书就关系不大。于是，DIN设计了一个attention结构，对用户的历史数据和待估算的广告之间部分匹配，从而得到一个权重值，用来进行embedding间的加权求和。
 ![din](ctr-models/DIN.png)
-DIN模型在对用户的表示计算上引入了attention network (也即图中的Activation Unit) 。DIN把用户特征、用户历史行为特征进行embedding操作，视为对用户兴趣的表示，之后通过attention network，对每个兴趣表示赋予不同的权值。这个权值是由用户的兴趣和待估算的广告进行匹配计算得到的，如此模型结构符合了之前的两个观察：用户兴趣的多峰分布以及部分对应。Attention network 的计算公式如下，
+
+DIN模型的输入分为2个部分：用户特征和广告(商品)特征。用户特征由用户历史行为的不同实体ID序列组成。在对用户的表示计算上引入了attention network (也即图中的Activation Unit) 。DIN把用户特征、用户历史行为特征进行embedding操作，视为对用户兴趣的表示，之后通过attention network，对每个兴趣表示赋予不同的权值。这个权值是由用户的兴趣和待估算的广告进行匹配计算得到的，如此模型结构符合了之前的两个观察：用户兴趣的多峰分布以及部分对应。Attention network 的计算公式如下，
 
 $$V_u=f(V_a)=\sum_{i=1}^N w_i \cdot V_i =\sum_{i=1}^N g(V_i,V_a) \cdot V_i$$
 
@@ -165,7 +167,11 @@ $$V_u=f(V_a)=\sum_{i=1}^N w_i \cdot V_i =\sum_{i=1}^N g(V_i,V_a) \cdot V_i$$
 
 ## 总结
 
-主流的CRT预估模型已经从传统的宽度模型向深度模型转变，与之相应的人工特征工程的工作量也逐渐减少。深度学习技术有三点优势。第一点，**模型设计组件化**。组件化是指在构建模型时，可以更多的关注idea和motivation本身，在真正数学化实现时可以像搭积木一样进行网络结构的设计和搭建。第二点，**优化方法标准化**。在2010年以前，Machine Learning还是一个要求较高的领域。它要求不仅了解问题、能定义出数学化的formulation，而且需要掌握很好的优化技巧，针对对应的问题设计具体的优化方法。但是在现在，深度学习因为模型结构上的变化，使得工业界可以用标准的SGD或SGD变种，很轻松的得到很好的优化解。第三点，**深度学习可以帮助我们实现设计与优化的解耦，将设计和优化分阶段进行**。对于工业界的同学来说，可以更加关注从问题本身出发，抽象和拟合领域知识。然后用一些标准的优化方法和框架来进行求解。
+主流的CRT预估模型已经从传统的宽度模型向深度模型转变，与之相应的人工特征工程的工作量也逐渐减少。上文提到的深度学习模型，除了DIN对输入数据的处理比较特殊之外，其他几个模型还是比较类似的，它们之间的区别主要在于网络结构的不同，如下图所示: ![](ctr-models/dnn-models.png)
+
+这四种深度学习模型的比较见下表：![](ctr-models/comparison.png)
+
+综上，深度学习技术主要有三点优势。第一点，**模型设计组件化**。组件化是指在构建模型时，可以更多的关注idea和motivation本身，在真正数学化实现时可以像搭积木一样进行网络结构的设计和搭建。第二点，**优化方法标准化**。在2010年以前，Machine Learning还是一个要求较高的领域。它要求不仅了解问题、能定义出数学化的formulation，而且需要掌握很好的优化技巧，针对对应的问题设计具体的优化方法。但是在现在，深度学习因为模型结构上的变化，使得工业界可以用标准的SGD或SGD变种，很轻松的得到很好的优化解。第三点，**深度学习可以帮助我们实现设计与优化的解耦，将设计和优化分阶段进行**。对于工业界的同学来说，可以更加关注从问题本身出发，抽象和拟合领域知识。然后用一些标准的优化方法和框架来进行求解。
 
 ## 参考资料
 
@@ -177,9 +183,3 @@ $$V_u=f(V_a)=\sum_{i=1}^N w_i \cdot V_i =\sum_{i=1}^N g(V_i,V_a) \cdot V_i$$
 [Yanru Qu et al, 2016] Product-based Neural Networks for User Response Prediction.
 [Huifeng Guo et al, 2017] DeepFM: A Factorization-Machine based Neural Network for CTR Prediction.
 [Guorui Zhou et al, 2017] Deep Interest Network for Click-Through Rate Prediction.
-
-
-
-
-
-

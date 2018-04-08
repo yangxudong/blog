@@ -19,7 +19,7 @@ toc: true
 
 当Node.js和Git都安装好后就可以正式安装Hexo了，终端执行如下命令：
 ```
-sudo npm install -g hexo
+sudo npm install -g hexo-cli
 ```
 终端cd到一个你选定的目录，执行hexo init初始化命令：
 ```
@@ -40,7 +40,7 @@ cd your-hexo-site
 git clone https://github.com/theme-next/hexo-theme-next.git themes/next
 ```
 
-在 NexT 主题目录下的 languages/{language}.yml （{language} 为你所使用的语言）为添加的菜单项设置对于的语言内容。
+在 NexT 主题目录下的 languages/{language}.yml （{language} 为你所使用的语言）为添加的菜单项设置对于的语言内容。比如添加自定义菜单`essays: 随笔`。
 
 ##拷贝文件
 拷贝原来搭建好的博客的站点配置文件和主题配置文件_config.yml并在对应的配置目录下做替换。
