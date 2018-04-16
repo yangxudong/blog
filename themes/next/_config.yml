@@ -129,6 +129,7 @@ site_state: true
 social:
   微博: http://weibo.com/u/1192649764 || weibo
   简书: http://www.jianshu.com/users/4e1990280df6/latest_articles || book
+  知乎: https://zhuanlan.zhihu.com/yangxudong || comments-alt
   CSDN: http://blog.csdn.net/yangxudong || rss
   博客园: http://www.cnblogs.com/yangxudong/ || rss-square
   #GitHub: https://github.com/yourname || github
@@ -428,7 +429,8 @@ gitment:
 #    button | slide
 # Warning: Baidu Share does not support https.
 #baidushare:
-##  type: button
+#  type: button
+#  baidushare: true
 
 # Share
 # This plugin is more useful in China, make sure you known how to use it.
