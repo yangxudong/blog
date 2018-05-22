@@ -134,9 +134,9 @@ Adam通常被认为对超参数的选择相当鲁棒，尽管学习率有时需�
 
 在这一点上并没有达成共识，还需要具体问题具体分析。下面两幅图可以提供一些关于收敛速度的参考。第一幅图展示了在代价函数误差等高线上几种不同的优化算法收敛速度情况；第二幅图展示了在遇到鞍点时，算法的鲁棒性。
 
-![SGD optimization on loss surface contours](http://sebastianruder.com/content/images/2016/09/contours_evaluation_optimizers.gif)
+![SGD optimization on loss surface contours](gradient-descent-variants/contours_evaluation_optimizers.gif)
 
-![SGD optimization on saddle point](http://sebastianruder.com/content/images/2016/09/saddle_point_evaluation_optimizers.gif)
+![SGD optimization on saddle point](gradient-descent-variants/saddle_point_evaluation_optimizers.gif)
 
 # 参考资料
 
