@@ -37,7 +37,7 @@ tf.estimator.Estimator(
 Estimator类有三个主要的方法：train/fit、evaluate、predict，分别表示模型的训练、评估和预测。三个方法都接受一个用户自定义的输入函数input_fn，执行input_fn获取输入数据。Estimator的这三个方法最终都会调用模型函数（model_fn）执行具体的操作，不同方法被调用时，传递给model_fn的mode参数也是不同的，如下一小节中描述的那样，mode参数是让用户在编写模型函数时知道当前定义的操作是用在模型生命周期的哪一个阶段。
 
 Tensorflow本身还提供了很多内置的开箱即用的Estimator，内置的 Estimator 是 tf.estimator.Estimator 基类的子类，而自定义 Estimator 是 tf.estimator.Estimator 的实例，如下图所示。
-![](https://www.tensorflow.org/images/custom_estimators/estimator_types.png)
+![](tensorflow-high-level-api/estimator_types.png)
 
 ### 模型函数
 
