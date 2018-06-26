@@ -15,6 +15,7 @@ tags: [深度学习, tensorflow]
 Tensorflow高阶API正是为了同时满足模型构建的灵活性与简洁性需求应运而生的，它能够让开发者快速搭建出高质量的模型，又能够使用结合低阶API实现不受限制的模型结构。
 <!--more-->
 下面就来看看tensorflow中有哪些常用的高阶API吧。
+![](https://3.bp.blogspot.com/-l2UT45WGdyw/Wbe7au1nfwI/AAAAAAAAD1I/GeQcQUUWezIiaFFRCiMILlX2EYdG49C0wCLcBGAs/s1600/image6.png)
 
 ### Estimator（估算器）
 Estimator类是机器学习模型的抽象，其设计灵感来自于典典大名的Python机器学习库Scikit-learn。Estimator允许开发者自定义任意的模型结构、损失函数、优化方法以及如何对这个模型进行训练、评估和导出等内容，同时屏蔽了与底层硬件设备、分布式网络数据传输等相关的细节。
@@ -61,6 +62,8 @@ def model_fn(features, target, mode, params)
 ```
 
 ### Dataset（数据集）
+
+在tensorflow中，构建模型输入流水线的最佳实践就是使用Dataset API。Dataset API底层使用C++实现，能够绕过python的一些性能限制，性能很好。
 
 Dataset是对训练、评估、预测阶段所用的数据的抽象表示，其提供了数据读取、解析、打乱（shuffle）、过滤、分批（batch）等操作，是构建模型输入管道的利器，我将会在另外一篇文章《[基于Tensorflow高阶API构建大规模分布式深度学习模型系列：基于Dataset API处理Input pipeline](https://zhuanlan.zhihu.com/p/38421397)》中详细介绍。
 
