@@ -1,5 +1,5 @@
 ---
-title: 基于Dataset API处理Input pipeline
+title: 基于Tensorflow高阶API构建大规模分布式深度学习模型系列:基于Dataset API处理Input pipeline
 date: 2018-07-08 10:23:02
 categories: [机器学习, 深度学习]
 tags: [深度学习, tensorflow]
