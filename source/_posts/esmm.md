@@ -59,3 +59,7 @@ L(\theta_{cvr},\theta_{ctr}) &=\sum_{i=1}^N l(y_i, f(x_i; \theta_{ctr}))\\
 综上所述，ESMM模型是一个新颖的CVR预估方法，其首创了利用用户行为序列数据在完整样本空间建模，避免了传统CVR模型经常遭遇的样本选择偏差和训练数据稀疏的问题，取得了显著的效果。另一方面，ESMM模型的贡献在于其提出的利用学习CTR和CTCVR的辅助任务，迂回地学习CVR的思路。ESMM模型中的BASE子网络可以替换为任意的学习模型，因此ESMM的框架可以非常容易地和其他学习模型集成，从而吸收其他学习模型的优势，进一步提升学习效果，想象空间巨大。
 
 原文链接：https://arxiv.org/abs/1804.07931
+
+关于ESMM模型的实现，请参考另一篇文章：{% post_link esmm-1 构建分布式Tensorflow模型系列之CVR预估案例ESMM模型 %}
+
+完整源代码：https://github.com/yangxudong/deeplearning/tree/master/esmm
