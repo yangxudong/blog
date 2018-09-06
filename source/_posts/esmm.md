@@ -40,10 +40,8 @@ mathjax: true
 2. 共享特征表示。ESMM模型借鉴迁移学习的思路，在两个子网络的embedding层共享embedding向量（特征表示）词典。网络的embedding层把大规模稀疏的输入数据映射到低维的表示向量，该层的参数占了整个网络参数的绝大部分，需要大量的训练样本才能充分学习得到。由于CTR任务的训练样本量要大大超过CVR任务的训练样本量，ESMM模型中特征表示共享的机制能够使得CVR子任务也能够从只有展现没有点击的样本中学习，从而能够极大地有利于缓解训练数据稀疏性问题。
 
 需要补充说明的是，ESMM模型的损失函数由两部分组成，对应于pCTR 和pCTCVR 两个子任务，其形式如下：
-\begin{align}
-L(\theta_{cvr},\theta_{ctr}) &=\sum_{i=1}^N l(y_i, f(x_i; \theta_{ctr}))\\
-&= \sum_{i=1}^N l(y_i\&z_i, f(x_i; \theta_{ctr}) \times f(x_i; \theta_{cvr}))
-\end{align}
+$$L(\theta_{cvr},\theta_{ctr}) =\sum_{i=1}^N l(y_i, f(x_i; \theta_{ctr}))
++ \sum_{i=1}^N l(y_i\&z_i, f(x_i; \theta_{ctr}) \times f(x_i; \theta_{cvr}))$$
 其中，$\theta_{ctr}$和$\theta_{cvr}$分别是CTR网络和CVR网络的参数，$l(\cdot)$是交叉熵损失函数。在CTR任务中，有点击行为的展现事件构成的样本标记为正样本，没有点击行为发生的展现事件标记为负样本；在CTCVR任务中，同时有点击和购买行为的展现事件标记为正样本，否则标记为负样本。
 
 由于ESMM模型创新性地利用了用户的序列行为做完模型的训练样本，因此并没有公开的数据集可供测试，阿里的技术同学从淘宝的日志中采样了一部分数据，作为公开的测试集，下载地址为：https://tianchi.aliyun.com/datalab/dataSet.html?dataId=408 。阿里妈妈的工程师们分别在公开的数据集和淘宝生产环境的数据集上做了测试，相对于其他几个主流的竞争模型，都取得了更好的性能。
