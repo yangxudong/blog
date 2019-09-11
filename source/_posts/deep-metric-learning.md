@@ -77,7 +77,7 @@ $$\begin{align}
 \tilde{L} &= \frac{1}{2 \lvert P \rvert} \sum_{(i, j) \in P} \max (0, \tilde{L}_{i, j})^2
 \end{align}$$
 
-![triplet loss](deep-metric-learning/triplet-loss.jpg)
+![triplet loss](deep-metric-learning/lifted-structure.jpg)
 
 ### 5. Proxy NCA loss
 
@@ -100,7 +100,7 @@ Ranked List Loss对着两个问题提出了改进。
 我们的目标是学习到一个函数$f$使得正样本对之间的相似度高于负样本之间的相似度。为了将正负样本区分开，Ranked List Loss希望负样本之间的距离大于某个阈值$α$，并且正样本之间的距离小于$α-m$，即正负样本之间至少有$m$的间隔。基于此，提出了pairwise margin loss：
 $$L_m(x_i, x_j;f)=(1-y_{ij})[α-d_{ij}]_+ + y_{ij}[d_{ij}-(α-m)]_+$$
 
-其中，当$y_i=y_j$时，$y_{ij}=1$，否则$y_{ij}=0$；$d_{ij}$表示$f(x_i), f(x_j)$之间的欧式距离。
+其中，当$y_i=y_j$时，$y_{ij}=1$，否则$y_{ij}=0$；$d_{ij}$表示$f(x_i), f(x_j)$之间的欧式距离，$[\cdot]_+$是hinge函数。
 
 对样本进行合适采样可以加快模型的收敛速率和提高模型性能。Ranked List Loss使用的采样策略很简单，就是损失函数不为0的样本，具体来说，对于正样本，损失函数不为0意味着它们与anchor之间的距离大于$α-m$, 类似的，对于负样本，损失函数不为0意味着它们与anchor之间的距离小于$α$，相当于使得同一类别位于一个半径为$α-m$大小的超球体内。
 
