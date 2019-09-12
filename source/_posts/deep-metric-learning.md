@@ -121,6 +121,10 @@ $$L_{RLL}(x_i^c;f)=L_P(x_i^c;f)+\lambda L_N(x_i^c;f)$$
 
 通常情况下，设置$\lambda=1$。
 
+Ranked list loss的整体流程图如下：
+
+![losses](deep-metric-learning/rll-flow.png)
+
 上述几种loss函数的对比如下图所示：
 
 ![losses](deep-metric-learning/loss-list.jpg)
