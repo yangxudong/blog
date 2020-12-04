@@ -1,7 +1,7 @@
 ---
 title: 距离玩转企业级DCN(Deep & Cross Network)模型，你只差一步
 date: 2018-08-30 16:20:44
-categories: [深度学习, 机器学习]
+categories: [机器学习, 深度学习]
 tags: [深度学习, DCN, CTR预估]
 mathjax: true
 ---
@@ -11,6 +11,7 @@ Deep & Cross Network(DCN)在 2017 年由 google 和 Stanford 共同发表的一�
 
 本文在详细介绍Deep & Cross Network网络结构的基础上，给出了高效实现DCN模型的tensorflow代码，主要点出了网络上一些主流实现中常犯的错误，让你真正能够在企业级的生产环境中玩转DCN模型。
 <!--more-->
+
 ## DCN网络结构
 
 DCN模型以一个嵌入和堆叠层(embedding and stacking layer)开始，接着并列连一个cross network和一个deep network，接着通过一个combination layer将两个network的输出进行组合。

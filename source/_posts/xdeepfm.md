@@ -1,8 +1,8 @@
 ---
 title: 深度CTR预估模型中的特征自动组合机制演化简史
 date: 2018-12-20 16:46:41
-categories: [深度学习, 机器学习]
-tags: [深度学习, xDeepFM, CTR预估]
+categories: [机器学习, 深度学习]
+tags: [深度学习, xDeepFM, CTR预估, 特征组合]
 mathjax: true
 ---
 

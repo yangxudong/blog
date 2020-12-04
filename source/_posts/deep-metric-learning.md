@@ -1,7 +1,7 @@
 ---
 title: 深度度量学习中的损失函数
 date: 2019-09-11 17:18:55
-categories: [机器学习, 度量学习, 深度学习]
+categories: [机器学习, 深度学习]
 tags: [度量学习, embedding, 相似度]
 mathjax: true
 ---
