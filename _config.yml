@@ -126,9 +126,9 @@ deploy:
 plugin:
 - hexo-generator-feed
 feed:
-type: atom ##feed类型 atom或者rss2
-path: atom.xml ##feed路径
-limit: 20  ##feed文章最小数量
+  type: atom ##feed类型 atom或者rss2
+  path: atom.xml ##feed路径
+  limit: 20  ##feed文章最小数量
 
 # 自动生成sitemap
 sitemap:

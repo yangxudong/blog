@@ -1,7 +1,7 @@
 ---
 title: 关键词规则挖掘在商品合规风险识别中的应用
 date: 2020-12-04 23:04:31
-categories: [机器学习]
+categories: [机器学习,内容安全]
 tags: [规则学习,商品合规,RuleLearning,数据清洗,GBDT]
 mathjax: true
 ---

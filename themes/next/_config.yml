@@ -185,10 +185,12 @@ social:
   E-Mail: mailto:yangxudongsuda@gmail.com || fa fa-envelope
   Weibo: https://weibo.com/u/1192649764 || fab fa-weibo
   Google: https://plus.google.com/u/0/115853952463021385464 || fab fa-google
-  简书: http://www.jianshu.com/users/4e1990280df6/latest_articles || fab book
-  知乎: https://zhuanlan.zhihu.com/yangxudong || fab medapps
-  CSDN: http://blog.csdn.net/yangxudong || rss
-  博客园: http://www.cnblogs.com/yangxudong/ || fab rss-square
+  LinkedIn: https://www.linkedin.com/in/%E6%97%AD%E4%B8%9C-%E6%9D%A8-755131169/ || fab fa-linkedin
+  简书: http://www.jianshu.com/users/4e1990280df6/latest_articles || fa fa-book
+  知乎: https://zhuanlan.zhihu.com/yangxudong || fab fa-zhihu
+  CSDN: http://blog.csdn.net/yangxudong || fa fa-blog
+  博客园: http://www.cnblogs.com/yangxudong/ || fab fa-blogger
+  RSS: /atom.xml || fa fa-rss
   #Twitter: https://twitter.com/yourname || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
   #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
@@ -210,6 +212,7 @@ links_settings:
 
 links:
   #Title: http://yoursite.com
+  国内镜像: https://yang_xu_dong.gitee.io
 
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
