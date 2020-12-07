@@ -123,6 +123,8 @@ $$RBO(S,T,p)=(1-p)\sum_{d=1}^{\infty}p^{d-1} \cdot A_d$$
 
 RBO指标有很好的性质，非常适合用来度量两个排序列表的相似度，强烈推荐！
 
+关注微信公众号“算法工程师的进阶之路”，后台回复“rbo”获取RBO算法实现**源代码**。
+
 ## 参考资料
 
 1. [Comparing Ranked List](https://ragrawal.wordpress.com/2013/01/18/comparing-ranked-list/)

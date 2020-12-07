@@ -86,7 +86,9 @@ $$\begin{equation} Loss=-log\prod_{(Q,D^+)} P(D^+|Q) \label{eq:loss} \end{equati
 
 另外，该损失函数同样要求商品H与目标商品之间的相似度比其他所有商品跟目标商品的相似度都要高，当这一要求未能被满足时，该损失函数通过一个额外的惩罚系数$t$迫使模型更加关注相似度关系未能被满足的样本。具体原理，可参看论文《Support Vector Guided Softmax Loss for Face Recognition》。
 
-当样本、模型、损失函数都合理定义好之后，就可以开始训练模型了。为了方便各位读者，这里提供一下模型训练的[tensorflow 源代码](https://github.com/yangxudong/deeplearning/tree/master/semantic_similarity/CDSMM)，文本特征提取使用CNN网络。如果觉得本文对您有帮助，请帮忙点个赞！
+当样本、模型、损失函数都合理定义好之后，就可以开始训练模型了。
+
+关注微信公众号“算法工程师的进阶之路”，后台回复“语义相似度”获取**完整源代码**。 如果觉得本文对您有帮助，请帮忙点个赞！
 
 ## 参考资料
 

@@ -164,7 +164,7 @@ DCN主要有以下几点贡献：
 - 十分节约内存（依赖于正确地实现），并且易于使用；
 - 实验结果表明，DCN相比于其他模型有更出色的效果，与DNN模型相比，较少的参数却取得了较好的效果。
 
-[源代码Github](https://github.com/yangxudong/deeplearning/tree/master/DCN)
+关注微信公众号“算法工程师的进阶之路”，后台回复DCN获取**完整源代码**。
 
 ## 论文阅读
 

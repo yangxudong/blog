@@ -11,8 +11,9 @@ language: zh-CN
 email: yangxudongsuda@gmail.com
 timezone:
 avatar: images/my_carton.png
-#duoshuo_shortname: yangxudong
-#duoshuo_share: true
+
+duoshuo_shortname: yangxudong
+duoshuo_share: true
 baidu_analytics: c57513996270ce211928f7fe0c7a5483
 
 # URL

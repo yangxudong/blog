@@ -60,4 +60,4 @@ $$L(\theta_{cvr},\theta_{ctr}) =\sum_{i=1}^N l(y_i, f(x_i; \theta_{ctr}))
 
 关于ESMM模型的实现，请参考另一篇文章：{% post_link esmm-1 构建分布式Tensorflow模型系列之CVR预估案例ESMM模型 %}
 
-完整源代码：https://github.com/yangxudong/deeplearning/tree/master/esmm
+关注微信公众号“算法工程师的进阶之路”，后台回复“ESMM“，获取**完整源代码**。

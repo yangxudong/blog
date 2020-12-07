@@ -179,7 +179,7 @@ def my_model(features, labels, mode, params):
 
 至此，实现ESMM模型需要介绍的内容就结束了，完整的代码已经在github上共享了，欢迎大家下载试用。
 
-完整源代码：[https://github.com/yangxudong/deeplearning/tree/master/esmm](https://github.com/yangxudong/deeplearning/tree/master/esmm)
+关注微信公众号“算法工程师的进阶之路”，后台回复“ESMM“，获取**完整源代码**。
 
 ## 推荐阅读
 
