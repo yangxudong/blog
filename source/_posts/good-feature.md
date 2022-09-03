@@ -8,13 +8,13 @@ categories: [机器学习,特征工程]
 
 以二分类问题为例，好的特征具有很好的区分性。例如学习任务是区分两种不同类型的狗：灰猎犬（Greyhound）和拉布拉多犬（Labrador）。假设有身高和眼睛的颜色两种特征。一般而言，灰猎犬的平均身高要比拉布拉多犬要高一些，而狗的眼睛的颜色不取决于够的品种，因此可以认为“身高”这个特征就比“眼睛颜色”这个特征更有用，因为“眼睛颜色”这个特征没有告诉我们任何信息。
 
-![灰猎犬和拉布拉多犬](http://upload-images.jianshu.io/upload_images/3901673-ff3b3e2698d3d271.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![灰猎犬和拉布拉多犬](good-feature/dog.png)
 
 <!-- more -->
 
 虽然灰猎犬的平均身高要比拉布拉多犬要高一些，但并不是说所有灰猎犬的身高都要比拉布拉多犬要高，那么为什么“身高”是一个有用的特征呢？假设在一个数据集D上两种类型的狗的身高分布如下图所示，其中红色表示灰猎犬，蓝色表示比拉布拉多犬。在这个数据集D上灰猎犬和拉布拉多犬各有500值，平均身高分别为28英寸和24英寸。
 
-![身高](http://upload-images.jianshu.io/upload_images/3901673-b95793098c6715e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![身高](good-feature/dog-height.png)
 
 现在我们需要断定在特定的身高每种狗的概率分布。现假设有一批身高为20英寸的狗，我们该如何预测这批狗的品种，使得我们的预测错误率最低呢？根据上面的图，我们判断这批狗中的大部分可能是拉布拉多犬。同样，看图的靠右侧的柱状图，比如35英寸的身高的狗我们有信心认为其是灰猎犬。25英寸高的狗呢？这个时候我们就很难判断其是什么品种了。综上，身高是一个有用的特征，但它并不完美。一般而言，{% post_link machine-learning 机器学习 %}任务都很难只需要单一的特征。这就是为什么在{% post_link machine-learning 机器学习 %}任务里我们需要多种特征，否则就不需要{% post_link machine-learning 机器学习 %}算法，而只需要写if else语句就够了。Features capture different types of information。
 
